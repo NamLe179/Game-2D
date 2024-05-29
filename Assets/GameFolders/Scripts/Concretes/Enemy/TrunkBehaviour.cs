@@ -8,20 +8,20 @@ using Managers;
 
 public class TrunkBehaviour : Enemies
 {
-    [SerializeField] float _maxChangeDirectionTime;
-    [SerializeField] float _maxAttackTime;
-    [SerializeField] Transform _projectileSpawnTransform;
+    [SerializeField] float _maxChangeDirectionTime; //Thời gian giữa 2 lần đổi hướng
+    [SerializeField] float _maxAttackTime; //Thời gian giữa 2 lần bắn
+    [SerializeField] Transform _projectileSpawnTransform; //Vị trí đạn xuất hiện
     [SerializeField] Transform _projectiles;
-    [SerializeField] bool _dontChangeDirection;
+    [SerializeField] bool _dontChangeDirection; //Kiểm tra đổi hướng
     float _horizontalDirection;
     float _currentTime;
-    bool _isPlayerFound;
+    bool _isPlayerFound; //Kiểm tra tìm thấy Player
     Flip _flip;
     WallCheck _playerCheck;
     RbMovement _rbMovement;
     Animator _anim;
     
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _anim = GetComponent<Animator>();
         _hitDamage = GetComponent<Damage>();
@@ -29,30 +29,30 @@ public class TrunkBehaviour : Enemies
         _rbMovement= GetComponent<RbMovement>();
         _flip = GetComponent<Flip>();
     }
-    private void Start()
+    private void Start() //Gán đối tượng
     { 
         
         GetRandomHorizontalAxis();
     }
-    private void Update()
+    private void Update() //Cập nhật tấn công Player
     {
-        if (!_isPlayerFound)
-            ChangeDirectionWithTime();
+        if (!_isPlayerFound) 
+            ChangeDirectionWithTime(); //Xoay liên tục nếu k thấy Player
         else
-            SendProjectilesWithTime();
+            SendProjectilesWithTime(); //Bắn
 
         PlayerCheck();
         _flip.FlipCharacter(_horizontalDirection);
        _rbMovement.HorizontalDirection= _horizontalDirection;
         
     }
-    void GetRandomHorizontalAxis()
+    void GetRandomHorizontalAxis() //Thiết lập hướng di chuyển ngẫu nhiên nếu đổi hướng
     {
         if (_dontChangeDirection) { _horizontalDirection = 1; return; } 
         _horizontalDirection = Random.Range(1, 3);
         if (_horizontalDirection == 2) _horizontalDirection = -1;
     }
-    void ChangeDirectionWithTime()
+    void ChangeDirectionWithTime() //Thay đổi hướng di chuyển sau 1 thời gian
     {
         if (_dontChangeDirection) return;
         _currentTime += Time.deltaTime;
@@ -62,7 +62,7 @@ public class TrunkBehaviour : Enemies
             _currentTime = 0;
         }
     }
-    void SendProjectilesWithTime()
+    void SendProjectilesWithTime() //Hiệu ứng sinh và bay của đạn
     {
         
         _currentTime += Time.deltaTime;
@@ -77,7 +77,7 @@ public class TrunkBehaviour : Enemies
             _currentTime = 0;
         }
     }
-    private void PlayerCheck()
+    private void PlayerCheck() //Kiểm tra Player có trong phạm vi tấn công
     {
         if (_playerCheck.IsThereWall)
         {
@@ -90,11 +90,11 @@ public class TrunkBehaviour : Enemies
            
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision) //Xử lý va chạm với Player
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.GetContact(0).normal.y == -1)
+            if (collision.GetContact(0).normal.y == -1) //Nếu bị diệt
             {
                 MakeTargetJump(collision);
                 _anim.SetTrigger("IsHit");
@@ -104,7 +104,7 @@ public class TrunkBehaviour : Enemies
                 Destroy(gameObject,0.5f);
                 
             }
-            else
+            else //Bắn trúng Player
             {
                 HitTarget(collision);
                 MakeTargetJump(collision);

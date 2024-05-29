@@ -9,9 +9,9 @@ namespace Combat
     {
         [SerializeField] int _hitDamage;
 
-        public int HitDamage { get => _hitDamage; }
+        public int HitDamage { get => _hitDamage; }//Lấy giá trị của _hit
 
-        public void HitTarget(Health health)
+        public void HitTarget(Health health) //Gây dmg cho mục tiêu
         {
             health.TakeHit(this);
         }

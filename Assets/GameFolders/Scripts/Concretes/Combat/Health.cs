@@ -16,47 +16,46 @@ namespace Combat
         [SerializeField] float _cooldownTimeAfterHit;
         bool _isInvulnerable;
         int _currentHealth;
-        public bool IsDead => _currentHealth <= 0;
+        public bool IsDead => _currentHealth <= 0; //Trả về true nếu máu về 0
 
         public int MaxHealth { get => _maxHealth; }
         public int CurrentHealth { get => _currentHealth;  }
         public float CooldownTimeAfterHit { get => _cooldownTimeAfterHit; set => _cooldownTimeAfterHit = value; }
 
-        public event System.Action OnDead;
-        public event System.Action OnHealthChanged;
+        public event System.Action OnDead; //Kích hoạt khi đối tượng chết
+        public event System.Action OnHealthChanged; //Kích hoạt khi máu tăng/giảm
         CharacterAnimation _anim;
 
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _anim = GetComponent<CharacterAnimation>();
             _currentHealth = _maxHealth;
         }
-        private void OnEnable()
+        private void OnEnable() //Kích hoạt sự kiện
         {
             OnHealthChanged?.Invoke();
             OnDead += HandleOnDead;
         }
 
-        private void HandleOnDead()
+        private void HandleOnDead() //Khởi tạo lại máu và anim appear
         {
             _currentHealth = _maxHealth;
             _anim.AppearAnim(0.4f);
         }
-
-        public void TakeHit(Damage damage)
+        public void TakeHit(Damage damage) //Xử lý đối tượng bị đánh trúng
         {
-            if (_isInvulnerable)
+            if (_isInvulnerable) //Không thể mất máu thì dừng
             {
                 return;
             }
-            
+    
             _currentHealth -= damage.HitDamage;
             OnHealthChanged?.Invoke();
             StartCoroutine(HitCooldown());
             if (IsDead)
                 OnDead?.Invoke();
         }
-        IEnumerator HitCooldown()
+        IEnumerator HitCooldown() //Coroutine xử lý thời gian k thể mất máu giữa 2 lần hit 
         {
             _isInvulnerable = true;
             _anim.TakeHitAnim(true);
@@ -65,10 +64,6 @@ namespace Combat
             _anim.TakeHitAnim(false);
 
         }
-
-
-
     }
-
 }
 

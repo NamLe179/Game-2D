@@ -5,22 +5,22 @@ using UnityEngine;
 using Abstracts;
 using Combat;
 
-public class SawController : Traps
+public class SawController : Traps 
 {
-    [SerializeField] Transform[] _patrolPoints;
-    [SerializeField] float _moveSpeed;
-    [SerializeField] Transform SawPositionsParent;
-    Vector2[] _patrolPositions;
+    [SerializeField] Transform[] _patrolPoints; //Các vị trí để cưa di chuyển
+    [SerializeField] float _moveSpeed; //Tốc độ
+    [SerializeField] Transform SawPositionsParent; //Lớp cha để saw tham chiếu
+    Vector2[] _patrolPositions; //Tọa độ của vị trí
     Vector2 _movePos;
     int _patrolPointIndex = 0;
     Vector3 _currentPointPos;
     Vector3 _startPointPos;
     
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _hitDamage = GetComponent<Damage>();
     }
-    private void Start()
+    private void Start() //Gán đối tượng khi bắt đầu
     {
         _currentPointPos = _patrolPoints[0].position;
         _startPointPos = transform.position;
@@ -31,7 +31,7 @@ public class SawController : Traps
         }
         
     }
-    private void Update()
+    private void Update() //Cập nhật vị trí liên tục
     {
         _movePos = _currentPointPos - transform.position;
         transform.Translate(_movePos.normalized * _moveSpeed * Time.deltaTime, Space.World);
@@ -42,7 +42,7 @@ public class SawController : Traps
         
     }
 
-    private void NextPoint()
+    private void NextPoint() //Chuyển vị trí sau khi saw đi qua 
     {
         _patrolPointIndex++;
         if(_patrolPointIndex == _patrolPoints.Length)
@@ -57,7 +57,7 @@ public class SawController : Traps
         _currentPointPos = _patrolPoints[_patrolPointIndex].position;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Gọi khi player chạm saw
     {
         if (collision.gameObject.CompareTag("Player"))
         {

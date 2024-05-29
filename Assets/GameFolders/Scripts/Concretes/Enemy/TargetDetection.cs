@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TargetDetection : MonoBehaviour
 {
-    [SerializeField] Transform _target;
+    [SerializeField] Transform _target; //Khai báo mục tiêu
     [SerializeField][Range(3, 10)] float _detectRange;
     [SerializeField][Range(3, 20)] float _actionRange;
     float _maxDistance;
@@ -18,12 +18,12 @@ public class TargetDetection : MonoBehaviour
     public bool IsTargetOnRight => _target.position.x > transform.position.x;
 
 
-    private void Update()
+    private void Update() //Cập nhật khoảng cách giữa Player và chicken 1 cách liên tục
     {
         _maxDistance = Vector2.Distance(transform.position, _target.position);
 
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() //Vẽ đồ thị biểu diễn phạm vi detect và action
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectRange);

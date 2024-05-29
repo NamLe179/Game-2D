@@ -24,7 +24,7 @@ namespace Controllers
         InteractHandler _interact;
         private bool _isPaused;
 
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _rb= GetComponent<RbMovement>();
             _anim= GetComponent<CharacterAnimation>();
@@ -34,7 +34,7 @@ namespace Controllers
             _interact = GetComponent<InteractHandler>();
             _input = new PcInput();
         }
-        private void OnEnable()
+        private void OnEnable() 
         {
             GameManager.Instance.OnGamePaused += HandleGamePaused;
             GameManager.Instance.OnGameUnpaused += HandleGameUnpaused;
@@ -46,9 +46,9 @@ namespace Controllers
         }
 
 
-        private void Update()
+        private void Update() //Xử lý input và hành động Player
         {
-            if (_input.IsExitButton)
+            if (_input.IsExitButton) //Ấn ESC để tạm dừng, tiếp tục
             {
                 
                 if (_isPaused)
@@ -67,13 +67,13 @@ namespace Controllers
 
             
 
-            if (_input.IsJumpButtonDown && _groundCheck.IsOnGround)
+            if (_input.IsJumpButtonDown && _groundCheck.IsOnGround) //Kiểm tra có ở mặt đất và k ấn jump thì được nhảy
             {
                 _isJumped = true;               
             }
-            if(_input.IsDownButton)
+            if(_input.IsDownButton) //Nhảy xuống platform khi ấn xuống
                 _platform.DisableCollider();
-            if(_input.IsInteractButton)
+            if(_input.IsInteractButton) //Tương tác
             {
                 _interact.Interact();
             }
@@ -81,9 +81,9 @@ namespace Controllers
             _anim.HorizontalAnim(_horizontalAxis);
             _flip.FlipCharacter(_horizontalAxis);
         }
-        private void FixedUpdate()
+        private void FixedUpdate() //Thực hiện hành động Player
         {
-            _rb.HorizontalMove(_horizontalAxis);  //if a gameObject has rb, dont use transform for movement
+            _rb.HorizontalMove(_horizontalAxis);  
             if (_isJumped )
             {
                 

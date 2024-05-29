@@ -10,20 +10,20 @@ namespace Controllers
     {
         [SerializeField] Fruits _fruitType;
         Animator _anim;
-        bool _isCollected;
-        private void Awake()
+        bool _isCollected; //Xác định fruit được nhặt chưa
+        private void Awake() //Gán đối tượng
         {
             _anim = GetComponent<Animator>();
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision) //Kích hoạt khi đối tượng đi vào collider
         {
-            if (collision.gameObject.CompareTag("Player") && !_isCollected)
+            if (collision.gameObject.CompareTag("Player") && !_isCollected) 
             {
                 
-                FruitManager.Instance.IncreaseFruitNumber(_fruitType);
+                FruitManager.Instance.IncreaseFruitNumber(_fruitType); //Tăng fruit thu thập
                 _anim.Play("Collected");
-                _isCollected = true;
-                Destroy(this.gameObject, 0.5f);
+                _isCollected = true; //Đánh dấu thu thập
+                Destroy(this.gameObject, 0.5f); //Hủy đối tượng sau 0.5s
 
             }
         }

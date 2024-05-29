@@ -4,14 +4,14 @@ using UnityEngine;
 using Abstracts.Input;
 namespace Inputs
 {
-    public class PcInput : IPlayerInput
+    public class PcInput : IPlayerInput //Lấy input từ bàn phím và gán cho các biến
     {
-        public float HorizontalAxis => Input.GetAxis("Horizontal");
-        public bool IsJumpButtonDown => Input.GetButtonDown("Jump");   //buttondown? fallcontrol
-        public bool IsJumpButton => Input.GetButton("Jump");
-        public bool IsDownButton => Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
-        public bool IsInteractButton => Input.GetKeyDown(KeyCode.E);
-        public bool IsExitButton => Input.GetKeyDown(KeyCode.Escape);
+        public float HorizontalAxis => Input.GetAxis("Horizontal"); //Di chuyển
+        public bool IsJumpButtonDown => Input.GetButtonDown("Jump");   
+        public bool IsJumpButton => Input.GetButton("Jump"); //Nhảy
+        public bool IsDownButton => Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow); //Ấn xuống để rơi từ platform
+        public bool IsInteractButton => Input.GetKeyDown(KeyCode.E); //Tương tác
+        public bool IsExitButton => Input.GetKeyDown(KeyCode.Escape); //Ấn ESC
     }
 
 }

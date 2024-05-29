@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GamePausedPanel : GameEndPanel
+public class GamePausedPanel : GameEndPanel //Xử lý các button trong panel tạm dừng
 {
     public void PauseClick()
     {

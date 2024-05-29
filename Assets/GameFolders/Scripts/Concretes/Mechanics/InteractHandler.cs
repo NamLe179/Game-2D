@@ -7,9 +7,9 @@ namespace Mechanics
 {
     public class InteractHandler : MonoBehaviour
     {
-        LeverController _normalLever;
-        GameObject _currentInteractableObject;
-        private void OnTriggerStay2D(Collider2D collision)
+        LeverController _normalLever; //Tham chiếu 
+        GameObject _currentInteractableObject; //Đối tượng hiện tại để tương tác
+        private void OnTriggerStay2D(Collider2D collision) //Gọi khi có đối tượng với collider nằm trong trigger của Player
         {
 
             if (collision.gameObject.CompareTag("InteractableObject"))
@@ -17,15 +17,15 @@ namespace Mechanics
                 _currentInteractableObject = collision.gameObject;
             }
         }
-        private void OnTriggerExit2D(Collider2D collision)
+        private void OnTriggerExit2D(Collider2D collision) //Gọi khi đối tượng ra khỏi trigger
         {
 
             _currentInteractableObject = null;
         }
 
-        public void Interact()  //could be better 
+        public void Interact() //Gọi khi Player tương tác
         {
-            if (_currentInteractableObject != null)
+            if (_currentInteractableObject != null) //Kiểm tra đối tượng hiện tại, kiểm tra có phải lever
             {
                 _normalLever = _currentInteractableObject.gameObject.GetComponent<LeverController>();
                 if(_normalLever != null ) 

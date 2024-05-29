@@ -5,7 +5,7 @@ using Abstracts;
 using Combat;
 namespace Controllers
 {
-    public class FiretrapController : Traps
+    public class FiretrapController : Traps 
     {
         Animator _anim;
         BoxCollider2D _collider;
@@ -13,23 +13,23 @@ namespace Controllers
 
         [SerializeField] float _maxTime;
         [SerializeField] float _startDelay;
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _collider = GetComponent<BoxCollider2D>();
             _collider.enabled = false;
             _anim = GetComponent<Animator>();
             _hitDamage = GetComponent<Damage>();
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision) //Gọi khi Player vào vùng collider
         {
             HitTarget(collision);
 
         }
-        private void OnTriggerStay2D(Collider2D collision)
+        private void OnTriggerStay2D(Collider2D collision) //Gọi khi Player vào vùng collider
         {
             MakeTargetJump(collision);
         }
-        private void Update()
+        private void Update() //Cập nhật thời gian, hiệu ứng liên t ục
         {
 
             if (Time.timeSinceLevelLoad < _startDelay) return;

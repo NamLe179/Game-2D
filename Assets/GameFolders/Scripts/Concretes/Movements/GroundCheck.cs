@@ -13,7 +13,7 @@ namespace Movements
 
         public bool IsOnGround { get => _isOnGround; set => _isOnGround = value; }
 
-        private void Update()
+        private void Update() //Kiểm tra đối tượng có chạm đất
         {
             foreach(Transform rayOrigin in _rayOrigins)
             {
@@ -21,11 +21,11 @@ namespace Movements
                 if (_isOnGround) break;
             }
         }
-        private void CheckOnGround(Transform rayOrigin)
+        private void CheckOnGround(Transform rayOrigin) //Gán đối tượng nếu chạm đất
         {
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin.position, Vector2.down, _maxRayLength,_layerMask);
             // Debug.DrawRay(rayOrigin.position, Vector2.down* _maxRayLength, Color.red);
-            if(hit.collider != null && !hit.collider.CompareTag("Trap"))
+            if(hit.collider != null && !hit.collider.CompareTag("Trap")) //Kiểm tra 
                 _isOnGround= true;
             else
                 _isOnGround = false;

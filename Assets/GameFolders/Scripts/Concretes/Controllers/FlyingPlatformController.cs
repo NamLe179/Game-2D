@@ -13,7 +13,7 @@ public class FlyingPlatformController : MonoBehaviour
 
     float _currentTime;
 
-    private void FixedUpdate()   // To prevent camera stuttering when player on the platform. Stuttering in Update()
+    private void FixedUpdate()   //Cập nhật vị trí platform liên tục
     {
 
         sinWave = Mathf.Sin(Time.timeSinceLevelLoad* _moveSpeed);
@@ -21,27 +21,27 @@ public class FlyingPlatformController : MonoBehaviour
         
         _offset = _direction.normalized * _length * sinWave;
         transform.position += _offset * Time.deltaTime;
-        
+        //Platform đi dạng hình sin để tạo độ mượt
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) //Kích hoạt khi có va chạm với đối tượng
     {
         if(collision.collider.CompareTag("Player"))
         {
-            collision.collider.transform.SetParent(transform);
+            collision.collider.transform.SetParent(transform); //Gán Player thành con để khi platform di chuyển Player di chuyển theo
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision) //Kích hoạt khi đang va chạm
     {
         if (collision.collider.CompareTag("Player") && !_moveAtStart)
         {
-                _moveAtStart = true;
+                _moveAtStart = true; //Đối tượng là Player và chưa di chuyển thì sẽ di chuyển
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision) //Kích hoạt khi đối tượng k va chạm với Platform
     {
         if (collision.collider.CompareTag("Player"))
-            collision.collider.transform.SetParent(null);
+            collision.collider.transform.SetParent(null); //Gỡ Player ra khỏi parent-child
     }
     
 }

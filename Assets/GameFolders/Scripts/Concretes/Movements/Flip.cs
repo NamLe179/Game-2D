@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flip : MonoBehaviour
 {
-    public void FlipCharacter(float horizontal)
+    public void FlipCharacter(float horizontal) //Đổi hướng di chuyển
     {
         if (horizontal != 0)
         {

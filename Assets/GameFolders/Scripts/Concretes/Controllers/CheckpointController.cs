@@ -11,11 +11,11 @@ public class CheckpointController : MonoBehaviour
 
     public bool IsChecked { get => _isChecked; }
 
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _anim = GetComponent<Animator>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Kích hoạt đôí tượng khi mục tiêu đi vào collider của đối tượng
     {
 
         if (!_isChecked && collision.gameObject.CompareTag("Player"))

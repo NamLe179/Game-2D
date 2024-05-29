@@ -12,11 +12,11 @@ namespace UIs
         [SerializeField] Health _playerHealth;
         Image[] _filledHearts;
 
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _filledHearts = GetComponentsInChildren<Image>();
         }
-        private void OnEnable()
+        private void OnEnable() //Gọi khi kích hoạt, đăng kí sự kiện
         {
             _playerHealth.OnHealthChanged += HandleHealthChanged;
             _playerHealth.OnDead += HandleOnDead;
@@ -26,7 +26,7 @@ namespace UIs
             HandleHealthChanged();
         }
 
-        private void HandleOnDead()
+        private void HandleOnDead() //Xử lý sau khi chết - hs lại
         {
             for(int i=0; i< _playerHealth.MaxHealth;i++)
             {
@@ -34,7 +34,7 @@ namespace UIs
             }
         }
 
-        private void HandleHealthChanged()
+        private void HandleHealthChanged() //Giảm máu 
         {
             if (_filledHearts.Length > _playerHealth.CurrentHealth)
             {

@@ -8,19 +8,19 @@ using Managers;
 
 public class CheckpointsManager : MonoBehaviour
 {
-    [SerializeField] Health _playerHealth;
+    [SerializeField] Health _playerHealth; //Lấy máu từ Player
     CheckpointController[] _checkpoints;
     StartpointController _startpoint;
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _startpoint = GetComponentInChildren<StartpointController>();
         _checkpoints = GetComponentsInChildren<CheckpointController>();
     }
-    private void OnEnable()
+    private void OnEnable() 
     {
         _playerHealth.OnDead += HandleOnDead;
     }
-    public void HandleOnDead()
+    public void HandleOnDead() //Xử lý biến về checkpoint gần nhất nếu chết
     {
         
         if(_checkpoints.LastOrDefault(x => x.IsChecked) == null)

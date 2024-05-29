@@ -11,13 +11,13 @@ namespace Controllers
         [SerializeField] GameObject _checkMark;
         [SerializeField] GameObject _leverFruits;
         Animator _anim;
-        bool IsLeverOn;
-        bool CanLeverWork;
-        private void Awake()
+        bool IsLeverOn; //Trạng thái lever
+        bool CanLeverWork; //Xác định lever có thể gạt k
+        private void Awake() //Gán đối tượng
         {
             _anim = GetComponent<Animator>();
         }
-        public void LeverInteraction()
+        public void LeverInteraction() //Xử lý tương tác với lever
         {
             if (!CanLeverWork)
             {
@@ -27,19 +27,19 @@ namespace Controllers
             else
                 TriggerLever();
         }
-        private void TryActivateLever()
+        private void TryActivateLever() //Kiểm tra điều kiện để kích hoạt lever
         {
             if (CheckConditions())
             {
-                CanLeverWork = true;
-                FruitManager.Instance.DecreaseFruitNumber(_door.DoorFruitType, _door.DoorFruitNumber);
+                CanLeverWork = true; //Gán giá trị
+                FruitManager.Instance.DecreaseFruitNumber(_door.DoorFruitType, _door.DoorFruitNumber); //Giảm fruit
                 TriggerLever();
                 _checkMark.SetActive(true);
                 _leverFruits.SetActive(false);
             }
             
         }
-        private void TriggerLever()
+        private void TriggerLever() //Chuyển trạng thái lever
         {
             
             if (IsLeverOn)
@@ -48,19 +48,19 @@ namespace Controllers
                 LeverOn();
 
         }
-        private void LeverOn()
+        private void LeverOn() //Gạt lever mở
         {
             IsLeverOn = true;
             _anim.SetBool("IsActive", true);
             _door.OpenDoor();
         }
-        private void LeverOff()
+        private void LeverOff() //Gạt lever đóng
         {
             IsLeverOn = false;
             _anim.SetBool("IsActive", false);
             _door.CloseDoor();
         }
-        private bool CheckConditions()
+        private bool CheckConditions() //Kiểm tra có đủ điều kiện để gạt lever k
         {
             return FruitManager.Instance.AreThereEnoughFruit(_door.DoorFruitType, _door.DoorFruitNumber);
         }

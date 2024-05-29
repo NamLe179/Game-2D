@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartpointController : MonoBehaviour
 {
     Animator _anim;
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _anim = GetComponent<Animator>();
     }

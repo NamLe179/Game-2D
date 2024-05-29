@@ -18,7 +18,7 @@ namespace EnemyAI
         Animator _anim;
         WallCheck _wallCheck;
 
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _hitDamage = GetComponent<Damage>();
             _flip = GetComponent<Flip>();
@@ -26,17 +26,17 @@ namespace EnemyAI
             _anim = GetComponent<Animator>();
             _wallCheck = GetComponent<WallCheck>();
         }
-        private void Start()
+        private void Start() //Gán đối tượng 
         {
-            if (!_setStartDirection)
+            if (!_setStartDirection) //Gán hướng
                 GetRandomHorizontalAxis();
             else
                 _horizontalAxisDirection = _startDirection;
         }
-        void Update()
+        void Update() //Cập nhật anim chuyển động 
         {
             
-            if (_wallCheck.IsThereWall)
+            if (_wallCheck.IsThereWall) //Kiểm tra gặp tường và xử lý
             {
                 _horizontalAxisDirection = -_horizontalAxisDirection;
             }
@@ -50,17 +50,17 @@ namespace EnemyAI
             }
             _flip.FlipCharacter(_horizontalAxisDirection);
         }
-        private void FixedUpdate()
+        private void FixedUpdate() //Di chuyển
         {
             _rbMovement.HorizontalMove(_horizontalAxisDirection);
         }
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision) //Xử lý va chạm với Player
         {
             if(collision.gameObject.CompareTag("Player"))
             {
-                if(collision.GetContact(0).normal.y==-1)
+                if(collision.GetContact(0).normal.y==-1) //Bị dẫm lên đầu
                 {
-                    MakeTargetJump(collision);
+                    MakeTargetJump(collision); //Xử lý hiệu ứng chết
                     _anim.SetTrigger("IsHit");
                     AddableToObjectPool deathFx = ObjectPoolManager.Instance.GetFromPool(PoolObjectsEnum.DeathEfx);
                     deathFx.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -4.3f);
@@ -68,7 +68,7 @@ namespace EnemyAI
                     Destroy(gameObject,0.5f);
                     
                 }
-                else if (collision.GetContact(0).normal.y == 1)
+                else if (collision.GetContact(0).normal.y == 1) 
                 {
                     HitTarget(collision);
 
@@ -82,7 +82,7 @@ namespace EnemyAI
             }
 
         }
-        void GetRandomHorizontalAxis()
+        void GetRandomHorizontalAxis() //Thiết lập hướng di chuyển 1 cách ngẫu nhiên
         {
             _horizontalAxisDirection = Random.Range(1, 3);
             if (_horizontalAxisDirection == 2) _horizontalAxisDirection = -1;

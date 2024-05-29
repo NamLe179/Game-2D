@@ -12,14 +12,14 @@ namespace Abstracts
         protected Damage _hitDamage;
         Rigidbody2D _rb;
         Health _targetHealth;
-        protected void HitTarget(Collider2D collision)
+        protected void HitTarget(Collider2D collision) //Xử lý khi bẫy va chạm với mục tiêu
         {
             _targetHealth = collision.gameObject.GetComponent<Health>();
             if (_targetHealth != null)
                 _hitDamage.HitTarget(_targetHealth);
         }
 
-        protected void MakeTargetJump(Collider2D collision)
+        protected void MakeTargetJump(Collider2D collision) //Xử lý mục tiêu sẽ bay lên 1 đoạn sau khi va chạm
         {
             if (!collision.CompareTag("Player")) return;
             _rb = collision.attachedRigidbody;

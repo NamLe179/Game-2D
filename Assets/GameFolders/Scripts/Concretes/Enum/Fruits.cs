@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum Fruits
+public enum Fruits //class quả
 {
     Melon,
     Pineapple,

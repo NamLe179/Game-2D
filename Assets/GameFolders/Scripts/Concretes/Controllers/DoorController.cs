@@ -14,16 +14,16 @@ namespace Controllers
         public Fruits DoorFruitType { get => _doorFruitType; }
         public int DoorFruitNumber { get => _doorFruitNumber; set => _doorFruitNumber = value; }
 
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _anim = GetComponent<Animator>();
         }
-        public void OpenDoor()
+        public void OpenDoor() //Mở cửa
         {
             
             _anim.SetBool("IsOpen", true);
         }
-        public void CloseDoor()
+        public void CloseDoor() //Đóng cửa
         {
             _anim.SetBool("IsOpen", false);
         }

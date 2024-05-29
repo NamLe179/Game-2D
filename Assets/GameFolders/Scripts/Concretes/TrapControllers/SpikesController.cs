@@ -6,14 +6,14 @@ using Combat;
 
 namespace Controllers
 {
-    public class SpikesController : Traps
+    public class SpikesController : Traps 
     {
-        private void Awake()
+        private void Awake() //Gán đối tượng
         {
             _hitDamage = GetComponent<Damage>();
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision) //Gọi khi Player dẫm/nhảy vào
         {
             HitTarget(collision);
             MakeTargetJump(collision);

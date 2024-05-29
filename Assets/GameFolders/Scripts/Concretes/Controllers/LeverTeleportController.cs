@@ -34,15 +34,15 @@ namespace Controllers
                 LeverOn();
 
         }
-        private void LeverOn()
+        private void LeverOn() //Gạt lever mở
         {
             
-            _followingCam.m_Lens.OrthographicSize = _lensValue;
-            _playerAnim.SetTrigger("IsAppear");
+            _followingCam.m_Lens.OrthographicSize = _lensValue; //Điều chỉnh size của cam
+            _playerAnim.SetTrigger("IsAppear"); 
             
             IsLeverOn = true;
             _anim.SetBool("IsActive", true);
-            _player.transform.position = _teleportPos.position;
+            _player.transform.position = _teleportPos.position; //Đổi vị trí của Player 
 
         }
         private void LeverOff()
@@ -52,7 +52,7 @@ namespace Controllers
             _anim.SetBool("IsActive", false);
 
         }
-        private void OnTriggerStay2D(Collider2D collision) 
+        private void OnTriggerStay2D(Collider2D collision) //Lấy tham chiếu 
         {
             if(collision.gameObject.CompareTag("Player"))
             {

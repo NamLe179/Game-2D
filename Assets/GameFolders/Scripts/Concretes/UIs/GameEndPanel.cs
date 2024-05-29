@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameEndPanel : MonoBehaviour
+public class GameEndPanel : MonoBehaviour //Xử lý các button trong panel kết thúc
 {
     public void TutorialClick()
     {

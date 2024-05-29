@@ -20,7 +20,7 @@ public class ChickenBehaviour : Enemies
         ChaseTarget,
         ChaseOver
     }
-    State _currentState;
+    State _currentState; //Trạng thái của chicken
     RbMovement _rbMovement;
     Animator _anim;
     Flip _flip;
@@ -30,7 +30,7 @@ public class ChickenBehaviour : Enemies
 
    
 
-    private void Awake()
+    private void Awake() //Gán đối tượng
     {
         _groundCheck = GetComponent<GroundCheck>();
         _wallCheck = GetComponent<WallCheck>();
@@ -40,15 +40,15 @@ public class ChickenBehaviour : Enemies
         _targetDetection = GetComponent<TargetDetection>();
         _hitDamage = GetComponent<Damage>();
     }
-    private void Start()
+    private void Start() //Gán đối tượng
     {
         _startPosition = transform.position;
         
     }
-    private void Update()
+    private void Update() //Cập nhật trạng thái chicken liên tục
     {
         StateControl();
-        switch (_currentState)
+        switch (_currentState) //Các trạng thái của chicken theo từng case
         {
             case State.Detection:
                 Detection();
@@ -65,7 +65,7 @@ public class ChickenBehaviour : Enemies
 
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //Xử lý di chuyển và trạng thái khi chạm tường
     {
         _rbMovement.HorizontalMove(_horizontalAxis);
         if (_wallCheck.IsThereWall && _groundCheck.IsOnGround && _currentState != State.Detection)
@@ -73,19 +73,19 @@ public class ChickenBehaviour : Enemies
             _rbMovement.Jump();
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision) //Xử lý va chạm với Player
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.GetContact(0).normal.y == -1)
+            if (collision.GetContact(0).normal.y == -1) //Xử lý bị nhảy lên đầu
             {
-                MakeTargetJump(collision);
+                MakeTargetJump(collision); //Xử lý hiệu ứng chết và biến mất 
                 _anim.SetTrigger("IsHit");
                 AddableToObjectPool deathFx = ObjectPoolManager.Instance.GetFromPool(PoolObjectsEnum.DeathEfx);
                 deathFx.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -4.3f);
                 deathFx.gameObject.SetActive(true);
                 
-                Destroy(gameObject,0.5f);
+                Destroy(gameObject,0.5f); //Hủy đối tượng sau 0.5s
             }
             else if(collision.GetContact(0).normal.y == 1)
             {
@@ -100,22 +100,22 @@ public class ChickenBehaviour : Enemies
         }
 
     }
-    private void StateControl()
+    private void StateControl() //Điều khiển trạng thái chicken
     {
         _anim.SetFloat("moveSpeed", Mathf.Abs(_horizontalAxis));
-        if (_targetDetection.IsTargetInActionRange)
+        if (_targetDetection.IsTargetInActionRange) //Xử lý Khi Player trong khu vực hành động 
         {
             _currentState = State.ChaseTarget;
             _anim.SetBool("IsTargetInAction", true);
             _anim.SetBool("IsTargetInDetection", false);
         }
-        else if(_targetDetection.IsTargetInDetectionRange)
+        else if(_targetDetection.IsTargetInDetectionRange) //Xử lý Khi Player trong khu vực bị phát hiện
         {
             _currentState = State.Detection;
             _anim.SetBool("IsTargetInDetection", true);
             _anim.SetBool("IsTargetInAction", false);
         }
-        else 
+        else //Khi Player ra khỏi khu vực bị phát hiện
         {
             _currentState = State.ChaseOver;
             _anim.SetBool("IsTargetInAction", false);
