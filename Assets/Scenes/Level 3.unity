@@ -2696,6 +2696,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1549203278}
     m_Modifications:
+    - target: {fileID: 2149222463234490041, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
+      propertyPath: _maxRayLength
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 2149222463234490042, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
       propertyPath: _dontChangeDirection
       value: 1
@@ -3667,6 +3671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1549203278}
     m_Modifications:
+    - target: {fileID: 2149222463234490041, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
+      propertyPath: _maxRayLength
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2149222463234490042, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
       propertyPath: _dontChangeDirection
       value: 1
@@ -5653,6 +5661,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1549203278}
     m_Modifications:
+    - target: {fileID: 2149222463234490041, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
+      propertyPath: _maxRayLength
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 2149222463234490042, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
       propertyPath: _dontChangeDirection
       value: 1
@@ -65743,6 +65755,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1549203278}
     m_Modifications:
+    - target: {fileID: 2149222463234490041, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
+      propertyPath: _maxRayLength
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2149222463234490042, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
       propertyPath: _dontChangeDirection
       value: 1
@@ -67919,6 +67935,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1549203278}
     m_Modifications:
+    - target: {fileID: 2149222463234490041, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
+      propertyPath: _maxRayLength
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2149222463234490042, guid: 979770b6fc8d2e240b9709dd64d910d5, type: 3}
       propertyPath: _dontChangeDirection
       value: 1
