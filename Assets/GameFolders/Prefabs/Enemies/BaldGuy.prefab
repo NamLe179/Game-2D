@@ -85,8 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _detectRange: 7.14
-  _actionRange: 4.9
+  _detectRange: 8.46
+  _actionRange: 6.1
 --- !u!114 &6846319586922496901
 MonoBehaviour:
   m_ObjectHideFlags: 0
